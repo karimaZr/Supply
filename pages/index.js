@@ -40,6 +40,7 @@ const index = () => {
     fetchData();  // Call the async function
 
   }, []);
+
   return (
     <>
       <Services

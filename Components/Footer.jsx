@@ -28,8 +28,6 @@ export default () => {
             <img src="https://www.floatui.com/logo.svg"
               className="w-32" />
             <p className="max-w-md">
-              Nulla auctor metus vitae lectus iaculis, vel euismod massa efficitur.
-
             </p>
             <ul className="flex flex-wrap items-center gap-4 text-sm sm:text-base">
               {footerNavs.map((item, idx) => (

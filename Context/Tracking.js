@@ -3,7 +3,7 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 
 import tracking from "../Context/Tracking.json";
-const ContractAddress = "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0";
+const ContractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
 
 const ContractABI = tracking.abi;
 
@@ -16,7 +16,7 @@ export const TrackingProvider = ({ children }) => {
     const DappName = "Product Tracking Dapp";
     const [currentUser, setCurrentUser] = useState("");
 
-    const createShipment = async (items) => {
+    const createShipment = async (items, callback) => {
         console.log(items);
         const { receiver, pickupTime, distance, price } = items;
 
@@ -39,39 +39,35 @@ export const TrackingProvider = ({ children }) => {
 
             await createItem.wait();
             console.log(createItem);
+
         } catch (error) {
             console.log("Something went wrong:", error);
         }
     };
+
 
     const getAllShipment = async () => {
         try {
             const provider = new ethers.providers.JsonRpcProvider();
             const contract = fetchContract(provider);
 
-            // Get all transactions
             const shipments = await contract.getAllTransactions();
-            console.log(shipments);
-
-            // Map over the shipments and format each shipment
             const allShipments = shipments.map((shipment) => ({
                 sender: shipment.sender,
                 receiver: shipment.receiver,
-                price: ethers.utils.formatEther(shipment.price.toString()),  // Format price from BigNumber to string
-                pickupTime: shipment.pickupTime.toNumber(),  // Convert BigNumber to number
-                deliveryTime: shipment.deliveryTime.toNumber(),  // Convert BigNumber to number
-                distance: shipment.distance.toNumber(),  // Convert BigNumber to number
-                isPaid: shipment.isPaid,  // This is a boolean, no need to convert
-                status: shipment.status,  // Convert BigNumber to number
+                price: ethers.utils.formatEther(shipment.price.toString()),
+                pickupTime: shipment.pickupTime.toNumber(),
+                deliveryTime: shipment.deliveryTime.toNumber(),
+                distance: shipment.distance.toNumber(),
+                isPaid: shipment.isPaid,
+                status: shipment.status,
             }));
-            console.log(allShipments);
 
             return allShipments;
         } catch (error) {
             console.error("Error retrieving shipments:", error);
         }
     };
-
 
     const getShipmentsCount = async () => {
         try {

@@ -15,14 +15,19 @@ export default ({
   const createItem = async () => {
     try {
       await createShipment(shipment);
+      // Close the modal after creating the shipment
+      setCreateShipmentModel(false);
     } catch (error) {
-      console.log("Wrong creating item");
+      console.log("Error creating item:", error);
     }
   };
 
   return createShipmentModel ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
-      <div className="fixed inset-0 w-full h-full bg-black opacity-40" onClick={() => setCreateShipmentModel(false)}></div>
+      <div
+        className="fixed inset-0 w-full h-full bg-black opacity-40"
+        onClick={() => setCreateShipmentModel(false)}
+      ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
           <div className="flex justify-end">
@@ -105,19 +110,15 @@ export default ({
                 />
               </div>
               <button
-                onClick={() => createItem()}
+                onClick={createItem}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
               >
                 Create Shipment
               </button>
             </form>
           </div>
-
         </div>
       </div>
     </div>
-  ) : (
-    ""
-  );
-
+  ) : null;
 };
