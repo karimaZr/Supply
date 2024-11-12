@@ -1,19 +1,20 @@
-// scripts/deploy.js
 const hre = require("hardhat");
 
 async function main() {
-  // Obtient le contrat à déployer
+  // Get the contract factory
   const Tracking = await hre.ethers.getContractFactory("Tracking");
+
+  // Deploy the contract
   const tracking = await Tracking.deploy();
 
-  // Attendre la finalisation du déploiement
-  await tracking.waitForDeployment();
+  // Wait for the contract to be mined
+  await tracking.deployTransaction.wait();
 
-  // Affiche l'adresse du contrat déployé
-  console.log("Tracking contract deployed to:", tracking.target);
+  // Output the contract address
+  console.log("Tracking contract deployed to:", tracking.address);
 }
 
-// Gérer les erreurs
+// Handle errors
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

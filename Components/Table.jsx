@@ -1,6 +1,7 @@
 export default ({ setCreateShipmentModel, allShipmentsdata }) => {
   const convertTime = (time) => {
     const newTime = new Date(time);
+    console.log("all",allShipmentsdata);
     const dateTime = new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: '2-digit',
@@ -21,7 +22,7 @@ export default ({ setCreateShipmentModel, allShipmentsdata }) => {
             href="javascript:void(0)"
             className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 md:text-sm rounded-lg md:inline-flex"
           >
-           When performance is measured, performance improves. When performance is measured and reported back, the rate of improvement accelerates
+            When performance is measured, performance improves. When performance is measured and reported back, the rate of improvement accelerates
           </p>
         </div>
         <div className="mt-3 md:mt-0">

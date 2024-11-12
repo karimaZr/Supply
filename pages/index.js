@@ -14,7 +14,7 @@ const index = () => {
     createShipment,
     getAllShipment,
     completeShipment,
-     getShipment,
+    getShipment,
     startShipment,
     getShipmentsCount
   } = useContext(TrackingContext);
@@ -25,15 +25,21 @@ const index = () => {
   const [completeModal, setCompleteModal] = useState(false);
   const [getModel, setGetModel] = useState(false);
   //Data State
-  const [allshipmentsData, setallShipmentData] = useState();
+  const [allShipmentData, setAllShipmentData] = useState([]);
   useEffect(() => {
-    const getCampaingsData = getAllShipment();
-    return async () => {
-      const allData = await getCampaingsData;
-      setallShipmentData(allData);
+    // Define an async function inside the useEffect
+    const fetchData = async () => {
+      try {
+        const allData = await getAllShipment();  // Fetch shipment data
+        setAllShipmentData(allData);  // Update the state with the fetched data
+      } catch (error) {
+        console.error("Error fetching shipments:", error);
+      }
     };
-  }
-    , []);
+
+    fetchData();  // Call the async function
+
+  }, []);
   return (
     <>
       <Services
@@ -44,7 +50,7 @@ const index = () => {
       />
       <Table
         setCreateShipmentModel={setCreateShipmentModel}
-        allshipmentsData={allshipmentsData}
+        allShipmentsdata={allShipmentData}
       />
       <Form
         createShipmentModel={createShipmentModel}

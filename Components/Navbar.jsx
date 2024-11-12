@@ -12,7 +12,7 @@ export default () => {
 
   ];
   useEffect(() => {
-    document.onclick = (e) => {
+    document.onClick = (e) => {
       const target = e.target;
       if (!target.closest(".menu-btn")) setState(false);
     };
@@ -31,7 +31,7 @@ export default () => {
           </a>
           <div className="md:hidden">
             <button className="menu-btn text-gray-500 hover:text-gray-800"
-              onclick={() => setState(!state)}>
+              onClick={() => setState(!state)}>
               {state ? <Nav1 /> : <Nav2 />}
             </button>
           </div>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 
-import tracking from "./Tracking.json";
-const ContractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+import tracking from "../Context/Tracking.json";
+const ContractAddress = "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0";
 
 const ContractABI = tracking.abi;
 
@@ -46,26 +46,32 @@ export const TrackingProvider = ({ children }) => {
 
     const getAllShipment = async () => {
         try {
-            const provider = new ethers.JsonRpcProvider();
+            const provider = new ethers.providers.JsonRpcProvider();
             const contract = fetchContract(provider);
 
+            // Get all transactions
             const shipments = await contract.getAllTransactions();
+            console.log(shipments);
+
+            // Map over the shipments and format each shipment
             const allShipments = shipments.map((shipment) => ({
                 sender: shipment.sender,
                 receiver: shipment.receiver,
-                price: ethers.utils.formatEther(shipment.price.toString()),
-                pickupTime: shipment.pickupTime.toNumber(),
-                deliveryTime: shipment.deliveryTime.toNumber(),
-                distance: shipment.distance.toNumber(),
-                isPaid: shipment.isPaid,
-                status: shipment.status,
+                price: ethers.utils.formatEther(shipment.price.toString()),  // Format price from BigNumber to string
+                pickupTime: shipment.pickupTime.toNumber(),  // Convert BigNumber to number
+                deliveryTime: shipment.deliveryTime.toNumber(),  // Convert BigNumber to number
+                distance: shipment.distance.toNumber(),  // Convert BigNumber to number
+                isPaid: shipment.isPaid,  // This is a boolean, no need to convert
+                status: shipment.status,  // Convert BigNumber to number
             }));
+            console.log(allShipments);
 
             return allShipments;
         } catch (error) {
             console.error("Error retrieving shipments:", error);
         }
     };
+
 
     const getShipmentsCount = async () => {
         try {
@@ -120,7 +126,7 @@ export const TrackingProvider = ({ children }) => {
             const accounts = await window.ethereum.request({
                 method: "eth_accounts",
             });
-            const provider = new ethers.providers.JsonRpcProvider();
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
             const contract = fetchContract(provider);
 
             const shipment = await contract.getShipment(accounts[0], index * 1);

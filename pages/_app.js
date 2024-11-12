@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { TrackingProvider } from '../Context/Tracking';
-import { Navbar ,Footer} from "../Components";
+import { Navbar, Footer } from "../Components";
 export default function App({ Component, pageProps }) {
   return (
     <>
