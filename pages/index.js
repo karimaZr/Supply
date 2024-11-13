@@ -47,7 +47,7 @@ const index = () => {
         setOpenProfile={setOpenProfile}
         setCompleteModal={setCompleteModal}
         setGetModel={setGetModel}
-        setStratMoedl={setStratModal}
+        setStartModal={setStratModal}
       />
       <Table
         setCreateShipmentModel={setCreateShipmentModel}
@@ -65,9 +65,9 @@ const index = () => {
         getShipmentsCount={getShipmentsCount}
       />
       <CompleteShipment
-        completeModal={completeModal}
-        setCompleteModal={setCompleteModal}
-        completeShipment={completeShipment}
+      completeModal={completeModal}
+      setCompleteModal={setCompleteModal}
+      completeShipment={completeShipment}
       />
       <GetShipment
         getModel={getModel}
@@ -76,7 +76,7 @@ const index = () => {
       />
       <StartShipment
         startModal={startModal}
-        setStratModal={setStratModal}
+        setStartModal={setStratModal}
         startShipment={startShipment}
       />
 

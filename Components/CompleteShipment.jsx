@@ -85,14 +85,3 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
   ) : null;
 };
 
-import React from 'react'
-
-const CompleteShipment = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default CompleteShipment
