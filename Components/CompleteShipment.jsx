@@ -11,14 +11,20 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
   };
 
   return completeModal ? (
-    <div className="flex items-center min-h-screen px-4 py-8">
-      <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
-        {/* Bouton de fermeture */}
-        <div className="flex justify-end">
-          <button
-            className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
+    <div className="fixed inset-0 z-10 overflow-y-auto">
+      <div className="fixed inset-0 w-full h-full bg-black opacity-40"
+         
+        
             onClick={() => setCompleteModal(false)}
-          >
+          ></div>
+
+          <div className="flex items-center min-h-screen px-4 py-8">
+            <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div className="flex justify-end">
+                <button
+                className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
+                onClick={()=> setCompleteModal(false)}
+                >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 mx-auto"
@@ -34,14 +40,14 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
           </button>
         </div>
 
-        {/* Contenu du formulaire */}
+         
         <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
           <h4 className="text-lg font-medium text-gray-800">
             Complete Shipment
           </h4>
 
           <form onSubmit={(e) => e.preventDefault()}>
-            {/* Champ de saisie pour le destinataire */}
+            
             <div className="relative mt-3">
               <input
                 type="text"
@@ -56,7 +62,7 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
               />
             </div>
 
-            {/* Champ de saisie pour l'ID */}
+           
             <div className="relative mt-3">
               <input
                 type="number"
@@ -71,7 +77,7 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
               />
             </div>
 
-            {/* Bouton pour changer le statut */}
+             
             <button
               onClick={() => changeStatus()}
               className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
@@ -80,8 +86,11 @@ export default ({ completeModal, setCompleteModal, completeShipment }) => {
             </button>
           </form>
         </div>
+        </div>
       </div>
     </div>
-  ) : null;
+  ) : (
+    ""
+  );
 };
 
